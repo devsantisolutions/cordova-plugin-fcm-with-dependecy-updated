@@ -60,7 +60,7 @@ public class FCMPluginActivity extends Activity {
 
     private static void handleNotification(Context context, Intent intent) {
         try {
-            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            AlertDialog alertDialog = new AlertDialog.Builder(context).create();
             alertDialog.setTitle("Handle notification");
             alertDialog.setMessage("Teste do alert dialog");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -95,7 +95,7 @@ public class FCMPluginActivity extends Activity {
             launchIntent.putExtras(intentExtras);
             context.startActivity(launchIntent);
         } catch (Exception e) {
-            AlertDialog alertDialogError = new AlertDialog.Builder(MainActivity.this).create();
+            AlertDialog alertDialogError = new AlertDialog.Builder(context).create();
             alertDialogError.setTitle("Handle notification error");
             alertDialogError.setMessage(e.getMessage());
             alertDialogError.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
