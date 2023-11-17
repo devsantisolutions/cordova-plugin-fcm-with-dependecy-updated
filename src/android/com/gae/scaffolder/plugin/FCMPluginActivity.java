@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.content.DialogInterface; 
+import androidx.appcompat.app.AlertDialog; 
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +60,18 @@ public class FCMPluginActivity extends Activity {
 
     private static void handleNotification(Context context, Intent intent) {
         try {
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Handle notification");
+            alertDialog.setMessage("Teste do alert dialog");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }
+            );
+            alertDialog.show();
+
             PackageManager packageManager = context.getPackageManager();
 
             Intent launchIntent = packageManager.getLaunchIntentForPackage(context.getPackageName());
@@ -81,6 +95,17 @@ public class FCMPluginActivity extends Activity {
             launchIntent.putExtras(intentExtras);
             context.startActivity(launchIntent);
         } catch (Exception e) {
+            AlertDialog alertDialogError = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialogError.setTitle("Handle notification error");
+            alertDialogError.setMessage(e.getMessage());
+            alertDialogError.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }
+            );
+            alertDialogError.show();
             Log.e(TAG, "handleNotification error " + e.getMessage());
         }
     }
